@@ -1,0 +1,10 @@
+<div class="command-interface" (click)="commandWindowClicked()">
+  <div>Powershell Command Line</div>
+  <div *ngFor="let consoleLine of consoleLines" [ngClass]="MessageType[consoleLine.messageType]">
+    <span *ngIf="consoleLine.messageType === MessageType.Input">> </span>{{consoleLine.output}}
+  </div>
+  <form (ngSubmit)="sendCommand()">
+    <span class="Input">> </span>
+    <input #commandInput type="text" name="command" [(ngModel)]="currentCommand" autocomplete="off"/>
+  </form>
+</div>

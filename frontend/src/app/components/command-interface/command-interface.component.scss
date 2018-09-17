@@ -1,0 +1,35 @@
+@mixin console-style {
+  font-family: Monaco, "Lucida Console", monospace;
+  background: black;
+  color: white;
+  font-size: 13px;
+  word-wrap: break-word;
+}
+
+.command-interface {
+  @include console-style;
+
+  .Input {
+    color: yellow;
+  }
+
+  .Error {
+    color: red;
+  }
+
+  form {
+    span {
+      width: 15px;
+    }
+    input {
+      @include console-style;
+      width: calc(100% - 16px);
+      border: none;
+      color: yellow;
+
+      &:before{
+        content: "> ";
+      }
+    }
+  }
+}

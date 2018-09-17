@@ -1,0 +1,78 @@
+<div>
+  <mat-card *ngFor="let machine of connectedMachines" class="mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>{{machine.machineName}}</mat-card-title>
+      <mat-card-subtitle>{{machine.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel [hideToggle]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Sistema Operacional</mat-panel-title>
+            <mat-panel-description>{{machine.windowsVersion}}</mat-panel-description>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel [hideToggle]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>.NET Framework</mat-panel-title>
+            <mat-panel-description>{{machine.netFrameworkVersion}}</mat-panel-description>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Armazenamento
+            </mat-panel-title>
+            <mat-panel-description>
+              {{getStorageDescription(machine)}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let drive of machine.storageDevices">
+            {{drive.label ? drive.label + ' (' + drive.name + ')' : drive.name}} possui {{drive.availableSize |
+            bytes}} livres de {{drive.totalSize | bytes}}
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Rede</mat-panel-title>
+            <mat-panel-description>{{machine.networks.length}} adaptadores de rede</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let adapter of machine.networks">
+            {{adapter.iPv4}} conectado em {{adapter.adapterName}}
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Antivirus
+            </mat-panel-title>
+            <mat-panel-description>
+              {{getAntivirusDescription(machine)}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let antivirus of machine.antivirus">
+            {{antivirus.name}} está {{antivirus.enabled ? 'ativo' : 'inativo'}}
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Firewalls
+            </mat-panel-title>
+            <mat-panel-description>
+              {{getFirewallDescription(machine)}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let firewall of machine.firewalls">
+            {{firewall.name}} está {{firewall.enabled ? 'ativo' : 'inativo'}}
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <app-command-interface [machineId]="machine.id"></app-command-interface>
+  </mat-card>
+</div>
