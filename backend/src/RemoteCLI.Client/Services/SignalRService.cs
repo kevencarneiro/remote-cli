@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using RemoteCLI.Client.Interfaces;
 using RemoteCLI.Common.Interfaces;
@@ -7,7 +8,7 @@ using static RemoteCLI.Common.Wrappers.Resiliency;
 
 namespace RemoteCLI.Client.Services
 {
-    internal class SignalRService : ISignalRService
+    public class SignalRService : ISignalRService
     {
         private readonly HubConnection _connection;
         private readonly IMachineService _machineService;
@@ -23,16 +24,16 @@ namespace RemoteCLI.Client.Services
             RegisterEvents(_connection);
         }
 
-        public Task Start()
+        public Task StartAsync(CancellationToken cancellationToken)
         {
             _isStarted = true;
-            return _connection.StartAsync();
+            return ExecuteOrRetryAsync(() => _connection.StartAsync(cancellationToken));
         }
 
-        public Task Stop()
+        public Task StopAsync(CancellationToken cancellationToken)
         {
             _isStarted = false;
-            return _connection.StopAsync();
+            return ExecuteOrRetryAsync(() => _connection.StopAsync(cancellationToken));
         }
 
         private HubConnection BuildConnection()
@@ -63,7 +64,7 @@ namespace RemoteCLI.Client.Services
                 });
 
             connection.Closed += (e)
-                => _isStarted ? ExecuteOrRetryAsync(Start) : Task.CompletedTask;
+                => _isStarted ? ExecuteOrRetryAsync(() => StartAsync(CancellationToken.None)) : Task.CompletedTask;
         }
     }
 }

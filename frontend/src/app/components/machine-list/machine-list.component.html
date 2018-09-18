@@ -1,4 +1,7 @@
 <div>
+  <div class="actions">
+    <button mat-raised-button (click)="openMulticastCommand()">Multicast Command</button>
+  </div>
   <mat-card *ngFor="let machine of connectedMachines" class="mat-elevation-z8">
     <mat-card-header>
       <mat-card-title>{{machine.machineName}}</mat-card-title>

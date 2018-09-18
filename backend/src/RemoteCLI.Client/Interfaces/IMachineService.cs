@@ -2,7 +2,7 @@
 
 namespace RemoteCLI.Client.Interfaces
 {
-    internal interface IMachineService
+    public interface IMachineService
     {
         MachineInfo GetMachineInfo();
     }
