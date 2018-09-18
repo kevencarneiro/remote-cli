@@ -42,6 +42,7 @@ namespace RemoteCLI.Api.Hubs
 
         public async Task SendCommand(string machineId, string command)
         {
+            if (command == null) return;
             var client = _clientAppService.GetClientById(machineId);
             await _clientContext.Clients.Client(client.ConnenctionId).SendAsync("SendCommand", Context.ConnectionId, command);
         }

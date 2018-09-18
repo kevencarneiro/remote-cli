@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SignalrService} from '../../services/signalr.service';
 import {MachineInfo} from '../../models/machine-info';
 import {BytesPipe} from 'angular-pipes';
+import {MatDialog} from '@angular/material';
+import {MulticastCommandComponent} from '../multicast-command/multicast-command.component';
 
 @Component({
   selector: 'app-machine-list',
@@ -13,7 +15,7 @@ export class MachineListComponent implements OnInit {
   connectedMachines: MachineInfo[] = [];
   commandOutput: string[] = [];
 
-  constructor(private _signalrService: SignalrService) {
+  constructor(private _signalrService: SignalrService, public dialog: MatDialog) {
   }
 
   connected(): void {
@@ -60,4 +62,10 @@ export class MachineListComponent implements OnInit {
     });
   }
 
+  openMulticastCommand() {
+    const dialogRef = this.dialog.open(MulticastCommandComponent, {
+      width: '400px',
+      data: this.connectedMachines
+    });
+  }
 }

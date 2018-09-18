@@ -8,7 +8,7 @@ using RemoteCLI.Common.Models;
 
 namespace RemoteCLI.Client.Services
 {
-    internal class PowerShellService : IPowerShellService
+    public class PowerShellService : IPowerShellService
     {
         private static readonly ConcurrentDictionary<string, PowerShell> Sessions = new ConcurrentDictionary<string, PowerShell>();
 

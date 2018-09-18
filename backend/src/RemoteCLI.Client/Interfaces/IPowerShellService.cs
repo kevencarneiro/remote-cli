@@ -4,7 +4,7 @@ using RemoteCLI.Common.Models;
 
 namespace RemoteCLI.Client.Interfaces
 {
-    internal interface IPowerShellService
+    public interface IPowerShellService
     {
         void ExecuteCommand(string sender, string command, Func<string, MessageType, string, Task> onCommandOutput);
     }
