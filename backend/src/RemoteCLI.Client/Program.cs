@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RemoteCLI.Client.Extensions;
@@ -11,7 +13,7 @@ namespace RemoteCLI.Client
     {
         private static async Task Main(string[] args)
         {
-            var isService = true;// !(Debugger.IsAttached || args.Contains("--console"));
+            var isService = !(Debugger.IsAttached || args.Contains("--console"));
 
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
