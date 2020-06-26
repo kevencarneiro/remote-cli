@@ -1,6 +1,15 @@
 # Remote CLI
 
-Control machines remotely using a web interface to views informations about the machine and send Powershell commands.
+Control machines remotely using a web interface to view basic network and security informations and send Powershell commands, individually or in batch.
+
+The following machine info are available:
+ * Machine Name
+ * Networks
+ * Antivirus
+ * Firewalls
+ * Windows Version
+ * .NET Framework Version
+ * Storage Devices
 
 ## Getting started
 
