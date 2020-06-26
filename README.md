@@ -1,12 +1,21 @@
-Front-end:
-- Instale o Angular CLI
-- Execute `ng serve`
+# Remote CLI
 
-Gerando instalador do Agente:
-- Instale o chocolatey
-- Instale o InnoSetup executando `choco install innosetup` em uma janela do PowerShell com privilégios administrativos
-- Navegue até a pasta backend\build e execute `.\build.ps1 --Target=Pack`
+Control machines remotely using a web interface to views informations about the machine and send Powershell commands.
 
-Instalando o agente:
-- Instalação gráfica: Execute o instalador e siga os passos
-- Instalação silenciosa: `RemoteCLIAgentSetup.exe /SP- /SUPPRESSMSGBOXES /VERYSILENT` 
+## Getting started
+
+### Front-end:
+- Install Angular CLI
+- Run `ng serve`
+
+### Back-end:
+- Open the solution with Microsoft Visual Studio
+
+### Generating agent installer:
+- Install chocolatey
+- Install InnoSetup running `choco install innosetup` in a Powershell windows with administrator rights
+- Go to folder backend\build and run `.\build.ps1 --Target=Pack`
+
+### Installing agent on the machines that will be controlled:
+- Graphical install: Run the installer and follow the steps
+- Quiet install: `RemoteCLIAgentSetup.exe /SP- /SUPPRESSMSGBOXES /VERYSILENT` 
